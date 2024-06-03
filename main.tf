@@ -3,16 +3,14 @@ provider "null" {}
 resource "null_resource" "install_docker" {
   provisioner "remote-exec" {
     inline = [
-      "curl -fsSL https://get.docker.com -o get-docker.sh",
-      "sudo sh get-docker.sh",
-      "sudo usermod -aG docker $USER"
+      "echo hello"
     ]
 
     connection {
       type        = "ssh"
-      user        = "ubuntu"  # 修改为你目标主机的用户名
-      private_key = file("~/.ssh/my-key.pem")  # 修改为你的 SSH 私钥路径
-      host        = "your-custom-host"  # 修改为你的目标主机 IP 或域名
+      user        = "roit"  # 修改为你目标主机的用户名
+      password    = "${var.root_password}"
+      host        = "${var.host}" # 修改为你的目标主机 IP 或域名
     }
   }
 }
