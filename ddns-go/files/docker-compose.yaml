@@ -1,0 +1,9 @@
+version: "3"
+services:
+    ddns-go:
+        container_name: ddns-go
+        restart: always
+        network_mode: host
+        volumes:
+            - /root/ddns-go/:/root
+        image: jeessy/ddns-go

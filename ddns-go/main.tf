@@ -52,6 +52,7 @@ resource "null_resource" "ddns_go" {
     }
   }
 
+
   provisioner "file" {
     source      = "temp/generated.yaml"
     destination = "/root/ddns-go/.ddns_go_config.yaml"
@@ -64,12 +65,23 @@ resource "null_resource" "ddns_go" {
     }
   }
 
+  provisioner "file" {
+    source      = "files/docker-compose.yaml"
+    destination = "/root/ddns-go/docker-compose.yaml"
+
+    connection {
+      type        = "ssh"
+      user        = "root"  # 修改为你目标主机的用户名
+      password    = "${var.root_password}"
+      host        = "${var.host}" # 修改为你的目标主机 IP 或域名
+    }
+  }
+
   provisioner "remote-exec" {
     inline = [
       <<EOF
-      docker run -d --name ddns-go --restart=always --net=host -v /root/ddns-go/:/root jeessy/ddns-go
+      docker compose -f /root/ddns-go/docker-compose.yaml up -d
       EOF
-
     ]
 
     connection {
