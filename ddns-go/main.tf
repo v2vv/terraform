@@ -28,7 +28,7 @@ resource "null_resource" "ru4n" {
   }
 
   provisioner "file" {
-    source      = ".ddns_go_config.yaml"
+    source      = "generated.yaml"
     destination = "/root/ddns-go/.ddns_go_config.yaml"
 
     connection {
