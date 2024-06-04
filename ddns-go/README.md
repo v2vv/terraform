@@ -1,5 +1,6 @@
-ddns-go
-### 变量
+# ddns-go
+
+## 变量
 
 ```json
 variable "host" {
@@ -20,5 +21,4 @@ variable "cloudflare_token" {
   description = "cloudflare_token"
   default     = "token"
 }
-
 ```
