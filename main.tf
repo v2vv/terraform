@@ -6,7 +6,7 @@ resource "null_resource" "ru4n" {
 
   provisioner "remote-exec" {
     inline = [
-      "mkdir /root/ansible"
+      "mkdir -p /root/ansible"
     ]
 
     connection {
