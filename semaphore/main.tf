@@ -1,7 +1,22 @@
 
 provider "null" {}
 
-resource "null_resource" "ru4n" {
+resource "null_resource" "semaphore" {
+
+  provisioner "remote-exec" {
+
+    inline = [
+      "docker rm -f semaphore"
+    ]
+
+    connection {
+      type        = "ssh"
+      user        = "root"  # 修改为你目标主机的用户名
+      password    = "${var.root_password}"
+      host        = "${var.host}" # 修改为你的目标主机 IP 或域名
+    }
+  }
+
 
 #创建配置文件夹
   provisioner "remote-exec" {
