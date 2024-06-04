@@ -7,7 +7,7 @@ resource "null_resource" "semaphore" {
   provisioner "remote-exec" {
 
     inline = [
-      "docker compose -f /root/semaphore/docker-compose.yaml down"
+      "docker rm -f semaphore"
     ]
 
     connection {

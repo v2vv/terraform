@@ -12,7 +12,7 @@ resource "null_resource" "ddns_go" {
 #停止容器
   provisioner "remote-exec" {
     inline = [
-      "docker compose -f /root/ddns-go/docker-compose.yaml down"
+      "docker rm -f ddns-go"
     ]
 
     connection {
