@@ -14,6 +14,12 @@ resource "null_resource" "ru4n" {
     EOT
   }
 
+    provisioner "local-exec" {
+    command = <<-EOT
+      cat generated.yaml
+    EOT
+  }
+
   provisioner "remote-exec" {
     inline = [
       "mkdir -p /root/ddns-go"
