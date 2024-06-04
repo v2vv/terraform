@@ -8,7 +8,7 @@ resource "null_resource" "semaphore" {
 
 #停止容器
     inline = [
-      "docker-compose -f /root/semaphore/docker-compose.yml down"
+      "docker compose -f /root/semaphore/docker-compose.yml down"
     ]
 
     connection {
