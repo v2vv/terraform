@@ -21,7 +21,8 @@ resource "null_resource" "ru4n" {
   provisioner "remote-exec" {
     inline = [
       "docker",
-      "pwd"
+      "pwd",
+      "ls"
     ]
 
     connection {
