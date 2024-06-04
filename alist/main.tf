@@ -20,7 +20,7 @@ resource "null_resource" "alist" {
   provisioner "file" {
     source      = "hosts"
     destination = "/root/alsit/data.db"
-
+ 
     connection {
       type        = "ssh"
       user        = "root"  # 修改为你目标主机的用户名
