@@ -4,7 +4,7 @@ provider "null" {}
 resource "null_resource" "alist" {
 
 #停止容器
-  provisioner "local-exec" {
+  provisioner "remote-exec" {
     inline = [
       "docker compose -f /root/alist/docker-compose.yaml down"
     ]
