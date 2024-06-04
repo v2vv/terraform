@@ -8,7 +8,7 @@ resource "null_resource" "semaphore" {
  
 #停止容器
     inline = [
-      "docker compose -f /root/semaphore/docker-compose.yml down"
+      "docker compose -f /root/semaphore/docker-compose.yaml down"
     ]
 
     connection {
@@ -79,7 +79,7 @@ resource "null_resource" "semaphore" {
   provisioner "remote-exec" {
     inline = [
       <<EOF
-        docker compose -f /root/semaphore/docker-compose.yml up -d
+        docker compose -f /root/semaphore/docker-compose.yaml up -d
       EOF
     ]
 
