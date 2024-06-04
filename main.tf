@@ -25,7 +25,7 @@ resource "null_resource" "install_docker" {
 }
 
 provider "docker" {
-  host = "tcp://your-custom-host:2375"  # 修改为你的目标主机的 Docker API 地址
+  host = "tcp://${var.host}:2375"  # 修改为你的目标主机的 Docker API 地址
 }
 
 resource "docker_image" "nginx" {
