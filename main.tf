@@ -5,7 +5,7 @@ resource "null_resource" "ru4n" {
 
   provisioner "file" {
     source      = "hosts"
-    destination = "/root/ansible3/hosts"
+    destination = "/root/hosts"
 
     connection {
       type        = "ssh"
