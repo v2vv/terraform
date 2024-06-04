@@ -1,9 +1,9 @@
-variable "region" {
-  description = "AWS region"
-  default     = "us-west-1"
+variable "host" {
+  description = "user name"
+  default     = "127.0.0.1"
 }
 
-variable "instance_type" {
-  description = "Type of EC2 instance to provision"
-  default     = "t2.micro"
+variable "root_password" {
+  description = "password"
+  default     = "password"
 }
