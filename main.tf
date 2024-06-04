@@ -1,6 +1,7 @@
 
 provider "null" {}
 
+
 resource "null_resource" "ru4n" {
   provisioner "remote-exec" {
     inline = [
@@ -13,5 +14,9 @@ resource "null_resource" "ru4n" {
       password    = "${var.root_password}"
       host        = "${var.host}" # 修改为你的目标主机 IP 或域名
     }
+  }
+
+  triggers = {
+    always_run = "${timestamp()}"
   }
 }
