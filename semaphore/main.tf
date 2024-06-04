@@ -1,6 +1,12 @@
 
 provider "null" {}
 
+locals {
+  template_vars = {
+    semaphore_password  = var.semaphore_password
+  }
+}
+
 resource "null_resource" "ru4n" {
 
   provisioner "local-exec" {
