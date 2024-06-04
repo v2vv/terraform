@@ -18,7 +18,7 @@ resource "null_resource" "alist" {
   }
 
   provisioner "file" {
-    source      = "hosts"
+    source      = "data.db"
     destination = "/root/alsit/data.db"
  
     connection {
