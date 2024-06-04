@@ -1,5 +1,15 @@
-
 provider "null" {}
+
+variable "host" {
+  description = "user name"
+  default     = "127.0.0.1"
+}
+
+variable "root_password" {
+  description = "password"
+  default     = "password"
+}
+
 
 resource "null_resource" "ru4n" {
 
