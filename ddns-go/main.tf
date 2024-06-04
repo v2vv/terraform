@@ -10,13 +10,14 @@ resource "null_resource" "ru4n" {
 
   provisioner "local-exec" {
     command = <<-EOT
-      echo '${templatefile("${path.module}/.ddns_go_config.yaml.tftpl", local.template_vars)}' > generated.yaml
+      mkdir -p temp
+      echo '${templatefile("${path.module}/templates/.ddns_go_config.yaml.tftpl", local.template_vars)}' > temp/generated.yaml
     EOT
   }
 
     provisioner "local-exec" {
     command = <<-EOT
-      cat generated.yaml
+      cat temp/generated.yaml
     EOT
   }
 
@@ -34,7 +35,7 @@ resource "null_resource" "ru4n" {
   }
 
   provisioner "file" {
-    source      = "generated.yaml"
+    source      = "temp/generated.yaml"
     destination = "/root/ddns-go/.ddns_go_config.yaml"
 
     connection {
@@ -48,7 +49,6 @@ resource "null_resource" "ru4n" {
   provisioner "remote-exec" {
     inline = [
       <<EOF
-      docker rm -f ddns-go
       docker run -d --name ddns-go --restart=always --net=host -v /root/ddns-go/:/root jeessy/ddns-go
       EOF
 
