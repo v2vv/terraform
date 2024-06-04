@@ -4,6 +4,7 @@ provider "null" {}
 resource "null_resource" "alist" {
 
 
+
   provisioner "remote-exec" {
     inline = [
       "mkdir /root/ansible"
