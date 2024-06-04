@@ -1,6 +1,23 @@
 
 provider "null" {}
 
+variable "host" {
+  description = "user name"
+  default     = "127.0.0.1"
+}
+
+variable "root_password" {
+  description = "password"
+  default     = "password"
+}
+
+variable "semaphore_password" {
+  description = "semaphore_password"
+  default     = "password"
+}
+
+
+
 resource "null_resource" "semaphore" {
 
 #停止容器
