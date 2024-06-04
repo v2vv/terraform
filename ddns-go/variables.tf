@@ -7,3 +7,7 @@ variable "root_password" {
   description = "password"
   default     = "password"
 }
+variable "ddns-go_password" {
+  description = "ddns-go_password"
+  default     = "password"
+}
