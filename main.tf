@@ -25,7 +25,8 @@ resource "null_resource" "install_docker" {
 }
 
 provider "docker" {
-  host = "unix:///var/run/docker.sock"  # 修改为你的目标主机的 Docker API 地址
+  host     = "ssh://${var.host}@${var.root_password}:22"
+  ssh_opts = ["-o", "StrictHostKeyChecking=no", "-o", "UserKnownHostsFile=/dev/null"]
 }
 
 resource "docker_image" "nginx" {
