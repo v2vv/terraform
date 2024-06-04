@@ -10,7 +10,7 @@ resource "null_resource" "ru4n" {
 
   provisioner "local-exec" {
     command = <<-EOT
-      echo '${templatefile("${path.module}/template.yaml.tpl", local.template_vars)}' > generated.yaml
+      echo '${templatefile("${path.module}/.ddns_go_config.yaml.tp1", local.template_vars)}' > generated.yaml
     EOT
   }
 
