@@ -1,12 +1,22 @@
 
 provider "null" {}
+locals {
+  template_vars = {
+    password  = var.ddns-go_password
+  }
+}
 
 resource "null_resource" "ru4n" {
 
+  provisioner "local-exec" {
+    command = <<-EOT
+      echo '${templatefile("${path.module}/template.yaml.tpl", local.template_vars)}' > generated.yaml
+    EOT
+  }
 
   provisioner "remote-exec" {
     inline = [
-      "mkdir -p /root/ansible"
+      "mkdir -p /root/ddns-go"
     ]
 
     connection {
@@ -18,8 +28,8 @@ resource "null_resource" "ru4n" {
   }
 
   provisioner "file" {
-    source      = "hosts"
-    destination = "/root/ansible/hosts"
+    source      = ".ddns_go_config.yaml"
+    destination = "/root/ddns-go/.ddns_go_config.yaml"
 
     connection {
       type        = "ssh"
@@ -31,9 +41,10 @@ resource "null_resource" "ru4n" {
 
   provisioner "remote-exec" {
     inline = [
-      "docker",
-      "pwd",
-      "ls"
+      <<EOF
+      docker run -d --name ddns-go --restart=always --net=host -v /root/ddns-go/:/root jeessy/ddns-go
+      EOF
+
     ]
 
     connection {
