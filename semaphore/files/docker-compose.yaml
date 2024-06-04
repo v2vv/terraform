@@ -1,8 +1,10 @@
+version: "3"
+services:
   semaphore:
     ports:
       - 3000:3000
     image: semaphoreui/semaphore:latest
-    name: semaphore
+    container_name: semaphore
     environment:
       SEMAPHORE_DB_DIALECT: bolt
       SEMAPHORE_ADMIN_PASSWORD: password
