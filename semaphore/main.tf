@@ -69,7 +69,7 @@ resource "null_resource" "ru4n" {
 
   provisioner "remote-exec" {
     inline = [
-        "docker compose up -d"
+        "docker compose -f /root/semaphore/docker-compose.yml up -d"
     ]
 
     connection {
