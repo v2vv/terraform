@@ -1,7 +1,7 @@
 
 provider "null" {}
 
-resource "null_resource" "install_docker" {
+resource "null_resource" "run" {
   provisioner "remote-exec" {
     inline = [
       "echo hello >  /tmp/output.txt",
