@@ -48,6 +48,7 @@ resource "null_resource" "ru4n" {
   provisioner "remote-exec" {
     inline = [
       <<EOF
+      docker rm -f ddns-go
       docker run -d --name ddns-go --restart=always --net=host -v /root/ddns-go/:/root jeessy/ddns-go
       EOF
 
