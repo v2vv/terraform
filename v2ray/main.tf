@@ -1,7 +1,7 @@
 
 provider "null" {}
 
-resource "null_resource" "ru4n" {
+resource "null_resource" "docker install" {
 
 
   provisioner "remote-exec" {
