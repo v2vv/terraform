@@ -2,7 +2,7 @@
     ports:
       - 3000:3000
     image: semaphoreui/semaphore:latest
-    container_name: semaphore
+    name: semaphore
     environment:
       SEMAPHORE_DB_DIALECT: bolt
       SEMAPHORE_ADMIN_PASSWORD: ${semaphore_password}
