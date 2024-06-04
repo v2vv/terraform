@@ -10,6 +10,7 @@ locals {
 resource "null_resource" "ddns_go" {
 
 #停止容器
+  provisioner "local-exec" {
     inline = [
       "docker compose -f /root/ddns-go/docker-compose.yaml down"
     ]

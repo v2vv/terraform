@@ -3,10 +3,9 @@ provider "null" {}
 
 resource "null_resource" "semaphore" {
 
-
-  provisioner "remote-exec" {
- 
 #停止容器
+  provisioner "remote-exec" {
+
     inline = [
       "docker compose -f /root/semaphore/docker-compose.yaml down"
     ]
