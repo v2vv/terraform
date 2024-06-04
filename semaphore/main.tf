@@ -1,17 +1,20 @@
 
 provider "null" {}
 
-locals {
-  template_vars = {
-    semaphore_password  = var.semaphore_password
-  }
-}
+resource "null_resource" "ru4n" {
 
-resource "null_resource" "semaphore" {
+  provisioner "local-exec" {
+    command = <<-EOT
+      echo '${templatefile("${path.module}/docker-compose.yaml.tftpl", local.template_vars)}' > generated.yaml
+    EOT
+  }
+
+
 
   provisioner "remote-exec" {
+
     inline = [
-      "mkdir -p /root/ansible"
+      "mkdir -p /root/semaphore"
     ]
 
     connection {
@@ -23,8 +26,20 @@ resource "null_resource" "semaphore" {
   }
 
   provisioner "file" {
-    source      = "hosts"
-    destination = "/root/ansible/hosts"
+    source      = "config.json"
+    destination = "/root/semaphore/config.json"
+
+    connection {
+      type        = "ssh"
+      user        = "root"  # 修改为你目标主机的用户名
+      password    = "${var.root_password}"
+      host        = "${var.host}" # 修改为你的目标主机 IP 或域名
+    }
+  }
+
+  provisioner "file" {
+    source      = "config.json"
+    destination = "/root/semaphore/config.json"
 
     connection {
       type        = "ssh"
@@ -36,9 +51,7 @@ resource "null_resource" "semaphore" {
 
   provisioner "remote-exec" {
     inline = [
-      "docker",
-      "pwd",
-      "ls"
+        "docker compose up -d"
     ]
 
     connection {

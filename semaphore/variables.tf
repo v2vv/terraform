@@ -7,7 +7,3 @@ variable "root_password" {
   description = "password"
   default     = "password"
 }
-variable "semaphore_password" {
-  description = "semaphore_password"
-  default     = "password"
-}
