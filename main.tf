@@ -4,8 +4,7 @@ provider "null" {}
 resource "null_resource" "run" {
   provisioner "remote-exec" {
     inline = [
-      "echo hello >  /tmp/output.txt",
-      "cat /tmp/output.txt"
+      "echo hello"
     ]
 
     connection {
