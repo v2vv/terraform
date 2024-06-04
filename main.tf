@@ -25,7 +25,7 @@ resource "null_resource" "install_docker" {
 }
 
 provider "docker" {
-  host     = "ssh://${var.host}@${var.root_password}:22"
+  host     = "ssh://root@${var.host}:22"
   ssh_opts = ["-o", "StrictHostKeyChecking=no", "-o", "UserKnownHostsFile=/dev/null"]
 }
 
