@@ -7,7 +7,24 @@ locals {
   }
 }
 
-resource "null_resource" "ru4n" {
+resource "null_resource" "ddns_go" {
+
+#删除 ddns-go 容器
+    provisioner "remote-exec" {
+    inline = [
+      <<EOF
+      docker rm -f ddns-go
+      EOF
+
+    ]
+
+    connection {
+      type        = "ssh"
+      user        = "root"  # 修改为你目标主机的用户名
+      password    = "${var.root_password}"
+      host        = "${var.host}" # 修改为你的目标主机 IP 或域名
+    }
+  }
 
   provisioner "local-exec" {
     command = <<-EOT
