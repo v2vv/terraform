@@ -3,13 +3,9 @@ provider "null" {}
 
 resource "null_resource" "alist" {
 
-#删除 alist 容器
-    provisioner "remote-exec" {
+#停止容器
     inline = [
-      <<EOF
-      docker rm -f alist
-      EOF
-
+      "docker compose -f /root/alist/docker-compose.yaml down"
     ]
 
     connection {
@@ -46,7 +42,7 @@ resource "null_resource" "alist" {
     }
   }
 
-    provisioner "file" {
+  provisioner "file" {
     source      = "files/config.json"
     destination = "/root/alist/config.json"
 
@@ -58,11 +54,24 @@ resource "null_resource" "alist" {
     }
   }
 
+  provisioner "file" {
+    source      = "files/docker-compose.yaml"
+    destination = "/root/alist/docker-compose.yaml"
+
+    connection {
+      type        = "ssh"
+      user        = "root"  # 修改为你目标主机的用户名
+      password    = "${var.root_password}"
+      host        = "${var.host}" # 修改为你的目标主机 IP 或域名
+    }
+  }
+
+
 
   provisioner "remote-exec" {
     inline = [
       <<EOF
-      docker run -d --restart=always -v /media/U盘:/media/U盘 -v /root/alist:/opt/alist/data -p 5244:5244 -e PUID=0 -e PGID=0 -e UMASK=022 --name="alist" xhofe/alist:latest
+      docker compose -f /root/alist/docker-compose.yaml up -d
       EOF
     ]
     connection {

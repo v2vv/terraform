@@ -9,13 +9,9 @@ locals {
 
 resource "null_resource" "ddns_go" {
 
-#删除 ddns-go 容器
-    provisioner "remote-exec" {
+#停止容器
     inline = [
-      <<EOF
-      docker rm -f ddns-go
-      EOF
-
+      "docker compose -f /root/ddns-go/docker-compose.yaml down"
     ]
 
     connection {
@@ -25,6 +21,7 @@ resource "null_resource" "ddns_go" {
       host        = "${var.host}" # 修改为你的目标主机 IP 或域名
     }
   }
+
 
   provisioner "local-exec" {
     command = <<-EOT
