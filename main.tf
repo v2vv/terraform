@@ -4,7 +4,8 @@ provider "null" {}
 resource "null_resource" "install_docker" {
   provisioner "remote-exec" {
     inline = [
-      "echo hello"
+      "echo hello >  /tmp/output.txt"
+      "cat /tmp/output.txt"
     ]
 
     connection {
