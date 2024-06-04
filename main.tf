@@ -1,9 +1,6 @@
 
 provider "null" {}
 
-
-  
-
 resource "null_resource" "ru4n" {
 
   provisioner "file" {
