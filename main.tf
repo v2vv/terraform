@@ -5,7 +5,7 @@ provider "null" {}
 resource "null_resource" "ru4n" {
   provisioner "remote-exec" {
     inline = [
-      "echo hello"
+      "docker"
     ]
 
     connection {
