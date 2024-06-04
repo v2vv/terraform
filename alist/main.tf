@@ -6,7 +6,7 @@ resource "null_resource" "alist" {
 #停止容器
   provisioner "remote-exec" {
     inline = [
-      "      "docker rm -f alist"
+      "docker rm -f alist"
     ]
 
     connection {
