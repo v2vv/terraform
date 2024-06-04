@@ -25,7 +25,7 @@ resource "null_resource" "install_docker" {
 }
 
 provider "docker" {
-  host = "tcp://${var.host}:2375"  # 修改为你的目标主机的 Docker API 地址
+  host = "unix:///var/run/docker.sock"  # 修改为你的目标主机的 Docker API 地址
 }
 
 resource "docker_image" "nginx" {
@@ -33,7 +33,7 @@ resource "docker_image" "nginx" {
 }
 
 resource "docker_container" "nginx" {
-  image = docker_image.nginx.latest
+  image = docker_image.nginx.image_id
   name  = "nginx"
   ports {
     internal = 80
