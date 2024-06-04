@@ -3,6 +3,23 @@ provider "null" {}
 
 resource "null_resource" "alist" {
 
+#删除 alist 容器
+    provisioner "remote-exec" {
+    inline = [
+      <<EOF
+      docker rm -f alist
+      EOF
+
+    ]
+
+    connection {
+      type        = "ssh"
+      user        = "root"  # 修改为你目标主机的用户名
+      password    = "${var.root_password}"
+      host        = "${var.host}" # 修改为你的目标主机 IP 或域名
+    }
+  }
+
 
   provisioner "remote-exec" {
     inline = [
@@ -18,7 +35,7 @@ resource "null_resource" "alist" {
   }
 
   provisioner "file" {
-    source      = "data.db"
+    source      = "files/data.db"
     destination = "/root/alsit/data.db"
  
     connection {
@@ -30,7 +47,7 @@ resource "null_resource" "alist" {
   }
 
     provisioner "file" {
-    source      = "config.json"
+    source      = "files/config.json"
     destination = "/root/alist/config.json"
 
     connection {
