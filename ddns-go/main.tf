@@ -2,7 +2,8 @@
 provider "null" {}
 locals {
   template_vars = {
-    ddns-go_password  = var.ddns-go_password
+    ddns-go_password = var.ddns-go_password
+    cloudflare_token = var.ddns-go_password
   }
 }
 
